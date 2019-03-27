@@ -1,0 +1,303 @@
+<#assign basePath="" />
+<#assign goodsPriceFlash = goodsPriceFlash />
+<#assign goodsId = goodsId />
+<#assign xxdGoodsParametric = xxdGoodsParametric />
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="${basePath}/lib/html5shiv.js"></script>
+<script type="text/javascript" src="${basePath}/lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="${basePath}/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="${basePath}/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="${basePath}/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="${basePath}/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="${basePath}/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="${basePath}/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<style type="text/css">
+.icon {
+	width: 2em;
+	height: 2em;
+	vertical-align: -0.15em;
+	fill: currentColor;
+	overflow: hidden;
+}
+
+.addImg {
+	fill: #cdcdcd;
+	width: 190px;
+	height: 190px;
+}
+.upload-input {
+	display: none;
+}
+.preview {
+	position: absolute;
+    width: 170px;
+    height: 170px;
+    left: 9px;
+    top: 10px;
+}
+.click {
+	position: absolute;
+	width: 190px;
+	height: 190px;
+	left: 0;
+	top: 0;
+	z-index: 1;
+	cursor: pointer;
+}
+.delete {
+	position: absolute;
+    right: 26px;
+    top: -1rem;
+    cursor: pointer;
+    display: none;
+    z-index: 30;
+}
+.up-del {
+	position: absolute;
+	left: 193px;
+	top: -5px;
+	cursor: pointer;
+	display: none;
+	z-index: 30;
+	width: 28px;
+	height: 28px;
+}
+.preview img {
+	width: 100%;
+	height: 100%;
+	    margin-left: 17px;
+		    border: 1px #ccc solid;
+    padding: 5px;
+}
+
+.up-sfz{float: left;
+    
+    margin-left: -30px;}
+	.up-sfz-d{float: left;
+    
+    margin-left: -44px;}
+	.up-sfz-tishi{    margin-top: 50px;
+    overflow: hidden;}
+	
+	.up-sfz-left{margin-left:2px;}
+	.up-sfz-de-left{position: absolute;
+    /* margin-left: 24px; 
+    display: block;*/
+    left: 179px;}
+	.m-16-left{    margin-left: -16px;}
+</style>
+<style type="text/css">
+.clearfix:after{content:"\20";display:block;height:0;clear:both;visibility:hidden}.clearfix{zoom:1}
+.tabBar {border-bottom: 2px solid #222}
+.tabBar span {background-color: #e8e8e8;cursor: pointer;display: inline-block;float: left;font-weight: bold;height: 30px;line-height: 30px;padding: 0 15px}
+.tabBar span.current{background-color: #222;color: #fff}
+.tabCon {display: none}
+</style>
+<title>闪购</title>
+</head>
+<body>
+<div class="page-container">
+<form class="form form-horizontal"  action ="/XxdGoodsFlash/updateFlashGoods" enctype="multipart/form-data" method="post">
+	<input type="hidden" name="goodsId" value="${goodsId}" />
+	<input type="hidden" name="goodsPriceNum" value="${goodsPriceFlash?size}" />
+	<div id="tab_demo" class="HuiTab">
+	  <div class="tabBar clearfix" style="position: fixed; top: 0px;z-index: 1000;width: calc(100% - 40px);margin: 0px; background: #f7f7f7;padding: 0px;border-bottom: 0px;box-shadow: 0px 5px 5px #ccc;"><span>第一步：填写商品相关信息</span><span>第二步：填写闪购相关信息</span></div>
+	  <div class="tabCon" style="margin-top:32px">
+		<div class="cl pd-5 bg-1 bk-gray mt-20" style="top:32px">
+			<span class="l">
+				<a href="javascript:void(0);"  class="btn btn-primary radius"><i class="Hui-iconfont"></i>价格信息</a>
+			</span>
+			<span class="r">
+				共有数据：<strong>${goodsPriceFlash?size}</strong> 条
+			</span>
+		</div>
+		<div class="mt-20">
+			<table class="table table-border table-bordered table-hover table-bg table-sort" id = "priceNum">
+				<thead>
+					<tr class="text-c">
+					<th width="70">规格名称</th>
+					<th width="40">成本价</th>
+					<th width="40">市场价</th>
+					<th width="40">会员价</th>
+					<th width="40">展示图</th>
+					<th width="40">闪购最低价格参考</th>
+					<th width="40">闪购价</th>
+					<th width="40">活动库存</th>
+					</tr>
+				</thead>
+				<tbody>
+					<#list goodsPriceFlash as g>
+					<tr class="text-c">
+						<td>${g.formatName}</td>
+						<td>${g.price?string('0.00')}</td>
+						<td>${g.marketPrice?string('0.00')}</td>
+						<td>${g.memberPrice?string('0.00')}</td>
+						<td><img height="50" src="${g.img}"></td>
+						<td>${g.flashMemberPrice?string('0.00')}</td>
+						<td><input type="number" class="flashMemberPrice" value="" maxs="${g.memberPrice?string('0.00')}" mins="${g.flashMemberPrice?string('0.00')}" id="num" name="flashMemberPrice${g.sign}"  style="width:100px"></td>
+						<td><input type="number" class="goodsPriceGroupNum" value="" id="num" name="num${g.sign}"  style="width:100px"></td>
+					</tr>
+				</#list>
+				</tbody>
+			</table>
+	  	</div><br><br>
+	  	<div class="cl pd-5 bg-1 bk-gray mt-20">
+	  		<span class="l">
+				<a href="javascript:void(0);"  class="btn btn-primary radius"><i class="Hui-iconfont"></i>属性信息</a>
+			</span>
+			<span class="r">
+				共有数据：<strong>${xxdGoodsParametric?size}</strong> 条
+			</span>
+		</div>
+		<div class="mt-20">
+			<table class="table table-border table-bordered table-hover table-bg table-sort">
+			<thead>
+				<tr class="text-c">
+					<th width="40">ID</th>
+					<th width="70">属性名称</th>
+					<th width="40">属性值</th>
+				</tr>
+			</thead>
+			<tbody>
+				<#list xxdGoodsParametric as gp>
+				<tr class="text-c">
+					<td>${gp.id}</td>
+					<td>${gp.name}</td>
+					<td>${gp.value}</td>
+				</tr>
+				</#list>
+			</tbody>
+		</table>
+	  	</div>
+	  </div>
+	  <div class="tabCon" style="margin-top:32px">
+		<div class="cl pd-5 bg-1 bk-gray mt-20" >
+		<span class="l">
+			<a href="javascript:void(0);"  class="btn btn-primary radius"><i class="Hui-iconfont"></i> 闪购信息</a>
+		</span>
+	</div>
+			<input type="hidden" name="goodsId" id="id" value="${goodsId}" />
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>活动标题：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="" placeholder="" id="" name="flashTitle">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开始时间：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<!-- <input type="text" autocomplete="off" onclick="WdatePicker({minDate:'%y-%M-{%d+1} %H:%m:%s'})" id="datemin" class="input-text Wdate" style="width:120px;" name="groupStartTime"> -->
+					<input type="text" autocomplete="off" onclick="WdatePicker({minDate:'%y-%M-{%d+1}'})" id="datemin" class="input-text Wdate" style="width:120px;" name="startTime">
+					<input type="text" autocomplete="off" onclick="WdatePicker({dateFmt:'HH',minDate:'08:00:00',maxDate:'22:00:00'})" id="hourmin" class="input-text Wdate" style="width:120px;" name="startTimeHour">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>结束时间：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" autocomplete="off" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}', maxDate:'#F{$dp.$D(\'datemin\')}'})" id="datemax" class="input-text Wdate" style="width:120px;" name="endTime">
+					<input type="text" autocomplete="off" onclick="WdatePicker({dateFmt:'HH', minDate:'#F{$dp.$D(\'hourmin\',{H:+1})}', maxDate:'23:00:00'}) " id="hourmax" class="input-text Wdate" style="width:120px;" name="endTimeHour">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>活动封面图：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<div class="up-sfz col-xs-6 col-sm-6 col-md-3 up-sfz-left2"> 
+	                   <svg class="icon addImg" aria-hidden="true">
+	                     <use xlink:href="#icon-tianjiatupian"></use>
+	                     </svg>
+	                     	<input name="file" type="file" class="upload_input" onChange="preview(this)" style="display: none;"/>
+	                     <div class="preview"></div>
+	                      <div class="click" onClick="loadImg(this)"></div>
+	                      <div class="delete up-del" onClick="deleteImg(this)"> 
+	                            <svg class="icon" aria-hidden="true"><use xlink:href="#icon-shanchu4"></use></svg> 
+	                       </div>
+	                </div>
+				</div>
+			</div>
+			<div class="row cl">
+				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+					<input class="btn btn-primary radius btn-primary-radius" type="submit"  value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+				</div>
+			</div>
+	</div>
+</div>
+</div>
+</form>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="${basePath}/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="${basePath}/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="${basePath}/static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="${basePath}/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="${basePath}/static/xxd/js/svg.js"></script>
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="${basePath}/lib/My97DatePicker/4.8/WdatePicker.js"></script> 
+<script type="text/javascript" src="${basePath}/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="${basePath}/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.table-sort').dataTable({
+		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+		"bStateSave": true,//状态保存
+		"aoColumnDefs": [
+		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+		  {"orderable":false,"aTargets":[0]}// 制定列不参与排序
+		]
+	});
+	$('.table-sort1').dataTable({
+		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+		"bStateSave": true,//状态保存
+		"aoColumnDefs": [
+		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+		  {"orderable":false,"aTargets":[0]}// 制定列不参与排序
+		]
+	});
+	$('#tab_demo').Huitab();
+});
+//选择图片
+function loadImg(obj){
+  $(obj).parent().find(".upload_input").click();
+}
+//删除
+function deleteImg(obj){
+  $(obj).parent().find('input').val('');
+  $(obj).parent().find('.preview').html('');
+  $(obj).hide();
+}
+ 
+function preview(file) {
+	var prevDiv = $(file).parent().find('.preview');
+	if (file.files && file.files[0]) {
+	  var reader = new FileReader();
+	  reader.onload = function(evt) {
+	    prevDiv.html('<img src="' + evt.target.result + '" />');
+	  }
+	  reader.readAsDataURL(file.files[0]);
+	} else {//IE
+	  prevDiv.html('<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>');
+	}
+	$(file).parent().find('.delete').show();
+}
+//检测用户填入的价格是否符合要求
+$(".flashMemberPrice").blur(function (){
+	if($(this).val() - $(this).attr("maxs") > 0){
+		$(this).val($(this).attr("maxs"));
+	}
+	if($(this).val() - $(this).attr("mins") < 0){
+		$(this).val($(this).attr("mins"));
+	}
+});
+</script> 
+</body>
+</html>
