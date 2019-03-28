@@ -11,11 +11,13 @@ import java.util.HashMap;
 public class Constans {
 	
 	//总配置文件
-	public static final String PROSOURCE = "F:/pro/pro.properties";
+	public static final String PROSOURCE = "D:/Developmentsoftware/eclipseStoragePath/workFile/pro/pro.properties";
+	/* public static final String PROSOURCE = "F:/pro/pro.properties"; */
 	//public static final String PROSOURCE = "/home/xxd/xxdAdmin/pro/pro.properties";
 	
 	//极光推送配置文件
-	public static final String SYSTEM_PROPERTIES = "F:/pro/system.properties";
+	/* public static final String SYSTEM_PROPERTIES = "F:/pro/system.properties"; */
+	public static final String SYSTEM_PROPERTIES = "D:/Developmentsoftware/eclipseStoragePath/workFile/pro/system.properties";
 	//统一的Ajax返回格式
 	public static HashMap<String, Object> returnCon(final int code, final Object con){
 		HashMap<String, Object> result =  new HashMap<String, Object>();
